@@ -1,0 +1,21 @@
+In order for this to work, you need:
+
+1. A working copy of OpenEMS, found here https://www.openems.de/, with working Matlab\Octave interface
+2. My EM2D_Solver. I want to separate this in the future, but for now: https://github.com/gadiLhv/EM2D_Solver
+3. Preferably Octave, I didn't test this on Matlab
+4. If Octave, "geometry" and "miscellaneous" packages installed
+
+How to use this:
+
+1. Export you design from KiCAD, using the "Plot" menu. Make sure:
+	1.a. You are using Milimeters
+	1.b. You are only exporting the layers you need, along with "edge-cuts". Anything else will cause bugs. 
+	1.c. "Plot graphic items using their contours" is UNCHECKED
+	1.d. Export only drills, not drill map. Also using milimeters.
+
+2. There is an example run script supplied, 'setup_and_run.m'. Use it as reference, change paths as necessary.
+
+3. All model preparation scripts (import, port placement) only need to be run once per-model. Don't run them each time.
+
+
+	
