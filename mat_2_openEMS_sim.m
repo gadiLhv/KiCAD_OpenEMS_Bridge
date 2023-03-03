@@ -86,8 +86,14 @@ for matIdx = 1:numel(materials)
 
    cMaterial = materials(matIdx);
 
+   % Calculate sigma from loss tangent
+   epp = cMaterial.epsR*cMaterial.tanD;
+
+   % Estimate conductivity at center frequency.
+   cKappa = epp*2*pi*f_center*EPS0;
+
    CSX = AddMaterial(CSX,cMaterial.name);
-   CSX = SetMaterialProperty( CSX, cMaterial.name, 'Epsilon',cMaterial.epsR,'Kappa',cMaterial.tanD);
+   CSX = SetMaterialProperty( CSX, cMaterial.name, 'Epsilon',cMaterial.epsR,'Kappa',cKappa);
 
 end
 

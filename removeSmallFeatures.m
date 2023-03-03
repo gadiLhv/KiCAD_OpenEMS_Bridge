@@ -106,8 +106,11 @@ for fIdx = 1:numel(smallFeatures)
       hold off;
    end
 
-
-   title('Press ''a'' for ''Add'', ''c'' for ''Clip'', ''q'' to ignore');
+   titleStr = 'Press ''a'' for ''Add'', ''c'' for ''Clip''';
+   if size(cLine,1) > 2
+      titleStr = [titleStr ', ''r'' for ''remove'''];
+   end
+   title([titleStr ', ''q'' to ignore']);
 
    hold 'off';
 
@@ -130,6 +133,15 @@ for fIdx = 1:numel(smallFeatures)
          case 'c'
             boolActionTaken = true;
             tempP = mod2D_booleanOperation(p,clipPart,'subtract');
+            break;
+         case 'r'
+            boolActionTaken = true;
+            tempP = p;
+            rho = [tempP.x tempP.y];
+            [featureIdxs,~] = find((p.x == cLine(:,1).') & (p.y == cLine(:,2).'));
+
+            tempP.x(featureIdxs(2:(end-1))) = [];
+            tempP.y(featureIdxs(2:(end-1))) = [];
             break;
          case 'q'
             break;

@@ -93,9 +93,9 @@ save('simParams.mat','-mat7-binary');
 
 % None of these stages has to be run multiple times. All data is saved
 KiCAD_dxf_2_mat
-
-KiCAD_mat_define_port_faces
-
-mat_2_openEMS_sim
-
-openEMS_results_postProcess
+%
+%KiCAD_mat_define_port_faces
+%
+%mat_2_openEMS_sim
+%
+%openEMS_results_postProcess
