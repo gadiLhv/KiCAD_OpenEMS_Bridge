@@ -66,10 +66,6 @@ for fileIdx = 1:numel(dxfFiles)
    % Subtract overlaps. This is to replace a manual macro.
    dxfPolygons = mod2D_subtractOvelapingPolygons(dxfPolygons);
 
-%   figure;
-%   mod2D_showPolygon(gca,dxfPolygons{1},[0 1 0],[0 0 0]);
-%   close(gcf);
-
    % Store polygons, and which layer was found
    layerPolygons{fileIdx} = dxfPolygons;
    foundLayers(fileIdx) = foundLayer;
@@ -86,12 +82,22 @@ for polsIdx = 1:numel(layerPolygons)
 
       cPoly = removeSmallFeatures(cPoly,minPointRes);
 
+      % If exist, remove any duplicate points
+      % [uNode,uIdx,u2oIdx] = mod2D_uniqueNodeByDist(node,distTH)
+      [uNodes,~,~] = mod2D_uniqueNodeByDist([cPoly.x cPoly.y],samePointRes);
+      if size(uNodes,1) < numel(cPoly.x)
+         cPoly.x = uNodes(:,1);
+         cPoly.y = uNodes(:,2);
+      end
+
       cPolygons{polIdx} = cPoly;
+
    end
 
    layerPolygons{polsIdx} = cPolygons;
-   % After unwanted features were removed,
-%   dxfPolygons = mod2D_reducePolygonResolution(dxfPolygons,minPointRes);
+
+
+
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

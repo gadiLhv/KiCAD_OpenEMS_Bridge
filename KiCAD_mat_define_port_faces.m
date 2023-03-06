@@ -34,7 +34,7 @@ metalLayers = find(arrayfun(layerIsMetal,layers));
 
 layersNoThick = layers;
 
-for lIdx = foundLayers(~~foundLayers).';
+for lIdx = metalLayers.';
    layersNoThick(lIdx).thickness = 0;
 end
 [elTable,subThickTable] = layerStruct_2_tables(layersNoThick);
@@ -63,6 +63,12 @@ while true
 
    % Pull out correct set of polygons
    foundLayer = find(foundLayers(:) == metalLayers(editLayer));
+
+   if isempty(foundLayer)
+      fprintf(1,'Chosen layer is empty. Please choose another\n');
+      continue;
+   end
+
    cPolygons = origPolygons{foundLayer};
 
    %%%%%%%%%%%%%%%
@@ -79,7 +85,7 @@ while true
    end
    hold off;
 
-   % Cleare calculate bounding box and centroid
+   % Calculate bounding box and centroid
    allX(isnan(allX)) = [];
    allY(isnan(allY)) = [];
    bBox = [min(allX(:)) max(allX(:)) min(allY(:)) max(allY(:))];

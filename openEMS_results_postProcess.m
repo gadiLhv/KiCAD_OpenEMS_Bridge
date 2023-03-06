@@ -12,6 +12,8 @@ load('simParams.mat');
 load(fullfile(Sim_Path,'model_data.mat'));
 load(fullfile(Sim_Path,'model_ports.mat'));
 load(fullfile(Sim_Path,'sim_data.mat'));
+load(fullfile(Sim_Path,'openEMS_data.mat'));
+load(fullfile(Sim_Path,'mesh_data.mat'));
 
 pkg load geometry
 pkg load miscellaneous
